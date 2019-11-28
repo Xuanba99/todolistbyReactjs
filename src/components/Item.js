@@ -1,9 +1,13 @@
 import React from 'react';
 class Item extends React.Component{
 
-handleDelete=(id)=>{
-    this.props.onClickDelete(id);
-}
+    handleDelete=(id)=>{
+        this.props.onClickDelete(id);
+
+    }
+    handleEdit=(item)=>{
+       this.props.onClickEdit(item);
+    }
 	render(){
          
         const item = this.props.item;
@@ -16,7 +20,7 @@ handleDelete=(id)=>{
                 <td>{item.name}</td>
                 <td>{this.showItemLevel(item.level)}</td>
                 <td> 
-                    <input type="button" value="Edit" className="btn-warning"/>
+                    <input type="button" value="Edit" className="btn-warning" onClick={()=>this.handleEdit(item)}/>
                     <input type="button" value="Delete" className="btn-submit" onClick={()=>this.handleDelete(item.id)}/> 
                 </td>
             </tr>

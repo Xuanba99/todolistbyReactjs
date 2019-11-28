@@ -3,12 +3,15 @@ class FormAdd extends React.Component{
 	 constructor(props){
 	 	super(props);
 	 	this.state={
+			task_id:'',
 	 		task_name:'',
 	 		task_level:0
-	 	};
+		 };
+		 
+		  
 	 }
-
 	 
+	
 	 onHandleChange=(evt)=>{
 	 	let target = evt.target;
 	 	let value = target.value;
@@ -17,6 +20,7 @@ class FormAdd extends React.Component{
 	 }
 	  onHandleSubmit=(evt)=>{
 	  	let items={
+			id:this.state.task_id,
 	  		 name:this.state.task_name,
 	  		level:this.state.task_level
 	  	}
@@ -25,14 +29,43 @@ class FormAdd extends React.Component{
 	 	 
 	 }
 
+
 	 onCancelForm=()=>{
 	 	this.props.cancelForm();
 	 }
+	 componentWillMount(){
+		var item= this.props.istemSelected;
+		if(item !== null){ 
+			this.setState({
+				task_id:item.id,
+				task_name:item.name,
+				task_level:item.level
+			});
+		 
+		}
+		 
+	 }
+	 componentWillReceiveProps(nextProps){
+		var item= nextProps.istemSelected;
+		 
+		if(nextProps !== null){ 
+			this.setState({
+				task_id:item.id,
+				task_name:item.name,
+				task_level:item.level
+			});
+		 
+		}
+	 }
 	 render(){
+
+		 
+
+	 
 		return( 
 			<div className="add-task-form">
 		           <form onSubmit={this.onHandleSubmit}>
-			           <input type="text" value={this.state.task_name} name="task_name"  onChange={this.onHandleChange} placeholder="Task Name"/>
+			           <input   type="text" value={this.state.task_name} name="task_name"  onChange={this.onHandleChange} placeholder="Task Name"/>
 				          <select value={this.state.task_level} onChange={this.onHandleChange} name="task_level">
 				              <option value={0}>Small</option>
 				              <option value={1}>Midium</option>
