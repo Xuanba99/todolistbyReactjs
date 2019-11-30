@@ -5,7 +5,7 @@ import Control from './components/Control';
 import FormAdd from './components/FormAdd';
 import ListTask from './components/ListTask';
 import {filter,includes,orderBy as funcOrderBy,remove, reject} from 'lodash';
-import tasks from './mocks/task';
+// import tasks from './mocks/task';
 const uuidv4 = require('uuid/v4');
 
 class App extends React.Component{ 
@@ -13,7 +13,7 @@ class App extends React.Component{
     super(props);
 
     this.state={
-     items:tasks,
+     items:[],
      toogleFrom:false,
      strSearch:'',
     sortBy:'name',
@@ -21,6 +21,14 @@ class App extends React.Component{
     istemSelected:null
 
     };
+  }
+  componentWillMount(){
+    let items = JSON.parse(localStorage.getItem('task'));
+    this.setState({
+      items:items
+    })
+    //save localStorage
+  
   }
 
 
@@ -47,7 +55,8 @@ class App extends React.Component{
     this.setState({
       items:this.state.items,
       toogleFrom:!this.state.toogleFrom
-    })
+    });
+    localStorage.setItem("task",JSON.stringify(this.state.items));
 
 
   }
@@ -66,6 +75,7 @@ class App extends React.Component{
     this.setState({
       items:items
     });
+    localStorage.setItem("task",JSON.stringify(items));
   }
   handleEdit=(item)=>{
     this.setState({

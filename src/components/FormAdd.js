@@ -35,7 +35,7 @@ class FormAdd extends React.Component{
 	 }
 	 componentWillMount(){
 		var item= this.props.istemSelected;
-		if(item !== null){ 
+		if(item !== null){
 			this.setState({
 				task_id:item.id,
 				task_name:item.name,
